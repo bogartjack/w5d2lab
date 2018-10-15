@@ -13,16 +13,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // db
-const products = require('./products');
+const products = require('./products.js');
+
+//show route
+
+app.get('/products/:id', (req,res) => {
+	res.render('products/show.ejs', {product: products[req.params.id]});
+});
 
 // index route
 app.get('/products', function(req, res) {
-  res.send(products);
-});
-
-// show route
-app.get('/products/:id', function(req, res) {
-  res.send(products[req.params.id]);
+	console.log('woop');
+  res.render('products/index.ejs', {products: products});
 });
 
 // create route
